@@ -1,29 +1,26 @@
 import Vue from 'vue'
 import App from './App.vue'
-import Navbar from "./components/Navbar.vue"
+import Navbar from "../src/components/Navbar.vue"
 import VueRouter from 'vue-router'
 import Home from "../src/components/Home.vue"
-import About from './components/About.vue'
+import About from '../src/components/About.vue'
 
 
-Vue.component('app-navbar', Navbar);
 Vue.use(VueRouter);
+Vue.component('app-navbar', Navbar);
+
 
 
 
 
 const routers = [
-  {
-    path: '/', component: Home
-  },
-  {
-    path: '/about', component: About
-  },
+  { path: '/', component: Home },
+  { path: '/about', component: About },
 ];
 
 
 const router = new VueRouter({
-  routers 
+  routers
 });
 
 
@@ -34,7 +31,8 @@ const router = new VueRouter({
 
 
 new Vue({
-  el: '#app',router,
+  router,
+  el: '#app',
 
   render: h => h(App)
 })

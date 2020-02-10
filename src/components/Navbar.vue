@@ -11,7 +11,8 @@
         <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="/about">About Us</a>
+         <router-link to="/about">About Us</router-link>
+
       </li>
       <!-- <li class="nav-item">
         <a class="nav-link" href="#">Github</a>
