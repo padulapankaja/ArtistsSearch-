@@ -11,14 +11,14 @@
         <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">About Us</a>
+        <a class="nav-link" href="/about">About Us</a>
       </li>
-      <li class="nav-item">
+      <!-- <li class="nav-item">
         <a class="nav-link" href="#">Github</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#">Others</a>
-      </li>
+      </li> -->
     </ul>
   </div>
 </nav>
