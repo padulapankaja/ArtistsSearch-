@@ -1,4 +1,6 @@
 <template>
+<div>
+<app-navbar></app-navbar>
   <form>
     <fieldset>
       <center>
@@ -13,11 +15,14 @@
       </center>
     </fieldset>
   </form>
+</div>
 </template>
 
 <script>
 import SearchArea from "./SearchArea.vue";
 import ResultArea from "./ResultArea.vue";
+import Navbar from "./Navbar.vue";
+
 export default {
   data() {
     return {
@@ -26,7 +31,8 @@ export default {
   },
   components: {
     "app-search": SearchArea,
-    "app-result": ResultArea
+    "app-result": ResultArea,
+    "app-navbar" : Navbar,
   }
 };
 </script>

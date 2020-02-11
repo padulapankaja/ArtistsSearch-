@@ -2,7 +2,8 @@
   <div id="app">
   
     <app-navbar> </app-navbar>
-  <router-view keep-alive></router-view>
+    <!-- <app-home></app-home> -->
+    <router-view></router-view>
 
   
   </div>
@@ -15,7 +16,7 @@ import About from '../src/components/About.vue'
 
 export default {
  components: {
-      Home,
+      'app-home' :Home,
       About,
       
     }
