@@ -17,7 +17,7 @@ import About from '../src/components/About.vue'
 export default {
  components: {
       'app-home' :Home,
-      About,
+      
       
     }
 };

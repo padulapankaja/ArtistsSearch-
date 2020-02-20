@@ -1,12 +1,17 @@
 <template>
   <div class="container">
     <div class="row">
-      <div class="col-sm-9 col-md-7 col-lg-8 mx-auto">
+      <div class="col-sm-9 col-md-7 col-lg-10 mx-auto">
         <div class="card card-signin my-5">
           <div class="card-body">
             <h5 class="card-title text-center">Sign In</h5>
 
-            <form class="form-signin">
+            <form
+              class="form-signin"
+              method="post"
+              action=""
+              v-on:submit.prevent="register"
+            >
               <div class="row mb-4">
                 <div class="col-md-2">
                   <label> First Name </label>
@@ -14,41 +19,58 @@
                 <div class="col-md-4">
                   <div class="form-label-group ">
                     <input
-                      type="email"
+                      type="text"
                       id="inputEmail"
                       class="form-control pl-4"
                       placeholder="Email address"
                       required
                       autofocus
+                      v-model="formdata.fname"
                     />
                   </div>
                 </div>
                 <div class="col-md-2">
-                  <label> First Name </label>
+                  <label> Last Name </label>
                 </div>
                 <div class="col-md-4">
                   <div class="form-label-group ">
                     <input
-                      type="email"
+                      type="text"
                       id="inputEmail"
                       class="form-control pl-4"
                       placeholder="Email address"
                       required
-                      
+                      v-model="formdata.lname"
                     />
                   </div>
                 </div>
                 <div class="col-md-2">
                   <label> Email </label>
                 </div>
-                <div class="col-md-10">
+                <div class="col-md-4">
                   <div class="form-label-group">
                     <input
-                      type="password"
+                      type="email"
                       id="inputPassword"
                       class="form-control pl-4"
-                      placeholder="Password"
+                      placeholder="Email"
                       required
+                      v-model="formdata.email"
+                    />
+                  </div>
+                </div>
+                <div class="col-md-2">
+                  <label> Tel </label>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-label-group">
+                    <input
+                      type="tel"
+                      id=""
+                      class="form-control pl-4"
+                      placeholder=""
+                      
+                    
                     />
                   </div>
                 </div>
@@ -63,7 +85,7 @@
                       class="form-control pl-4"
                       placeholder="Email address"
                       required
-                    
+                      v-model="formdata.dob"
                     />
                   </div>
                 </div>
@@ -72,17 +94,22 @@
                 </div>
                 <div class="col-md-4">
                   <div class="form-group">
-                    <select class="custom-select" style="border-radius:55px; height:28px; font-size:14px; margin:0px ; padding:0px 0px 0px 10px " required>
-                      <option selected="">Open this select menu</option>
+                    <select
+                      class="custom-select"
+                      style="border-radius:55px; height:28px; font-size:14px; margin:0px ; padding:0px 0px 0px 10px "
+                      required
+                      v-model="formdata.gender"
+                    >
+                      <option selected="" default>Open this select menu</option>
                       <option value="male">Male</option>
                       <option value="female">Female</option>
                     </select>
                   </div>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-2">
                   <label> Password </label>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-4">
                   <div class="form-label-group ">
                     <input
                       type="password"
@@ -90,14 +117,15 @@
                       class="form-control pl-4"
                       placeholder="password"
                       required
-                      
+                      v-model="formdata.password"
                     />
+                     <password v-model="formdata.password" v-bind:is-badge="true"  :strength-meter-only="true" :toggle="true" />
                   </div>
                 </div>
-                <div class="col-md-3">
-                  <label> Confirm Password </label>
+                <div class="col-md-2">
+                  <label> Confirm&nbsp;Password </label>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-4">
                   <div class="form-label-group ">
                     <input
                       type="password"
@@ -105,7 +133,7 @@
                       class="form-control pl-4"
                       placeholder="Confirm password"
                       required
-                     
+                      v-model="formdata.confirmpass"
                     />
                   </div>
                 </div>
@@ -119,9 +147,11 @@
                   Sign Up
                 </button>
               </center>
-               <hr class="my-4" />
-             <router-link to="/login" class="float-right text-white ">Already have account</router-link>  
- 
+              <lable style="color:red">  {{ passwordText }} </lable>
+              <hr class="my-4" />
+              <router-link to="/login" class="float-right text-white "
+                >Already have account</router-link
+              >
             </form>
           </div>
         </div>
@@ -131,7 +161,78 @@
 </template>
 
 <script>
-export default {};
+import axios from "axios";
+  import Password from 'vue-password-strength-meter';
+
+export default {
+  components: { Password 
+
+    
+  },
+  data() {
+    return {
+    password: null,
+      title: "Form Register",
+      formdata: [],
+      message: "",
+      sucess: 0,
+      passwordText : null,
+    
+
+    };
+  },
+
+  methods: {
+    register(e) {
+
+      var pas = this.formdata.password;
+      var conpas = this.formdata.confirmpass;
+
+      if(pas != conpas){
+
+      this.passwordText  = "Password did not match";
+
+        return false;
+      }else{
+
+
+      }
+      
+
+
+      e.preventDefault();
+
+      const newuser = {
+        fname: this.formdata.fname,
+        lname: this.formdata.lname,
+        email: this.formdata.email,
+        dob: this.formdata.dob,
+        gender: this.formdata.gender,
+        password: this.formdata.password
+      };
+      console.log("this.newuser");
+      console.log(newuser);
+      console.log("this.newuser");
+      axios
+        .post("http://localhost:9000/users/regiser", newuser)
+        .then(response => {
+          window.location.replace("#/login");
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+    },
+
+    showFeedback ({suggestions, warning}) {
+        console.log('🙏', suggestions)
+        console.log('⚠', warning)
+      },
+      showScore (score) {
+        console.log('💯', score)
+      }
+
+  }
+};
 </script>
 
 <style scoped>

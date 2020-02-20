@@ -8,7 +8,7 @@
   <div class="collapse navbar-collapse" id="navbarColor01">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-          <router-link class="router_Link" to="/">Home <span class="sr-only">(current)</span></router-link>
+          <router-link class="router_Link" to="/home">Home <span class="sr-only">(current)</span></router-link>
       </li>
       <li class="nav-item">
          <router-link to="/about" class="router_Link">About <span class="sr-only">(current)</span></router-link>

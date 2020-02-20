@@ -5,7 +5,7 @@
         <div class="card card-signin my-5">
           <div class="card-body">
             <h5 class="card-title text-center">Sign In</h5>
-            <form class="form-signin" action=""  >
+            <form class="form-signin" action=""  method="post"   v-on:submit.prevent="login" >
               <div class="row mb-4">
                   <div class="col-md-3">
                       <label> Email </label>
@@ -19,31 +19,36 @@
                     class="form-control pl-4"
                     placeholder="Email address"
                     required
-                    autofocus
+                    autofocus v-model="formdata.email"
                   />
                 </div>
                   </div>
                     <div class="col-md-3">
                       <label> Password </label>
                   </div>
-                  <div  class="col-md-9"> 
+                  <div  class="col-md-6"> 
                 <div class="form-label-group">
                   <input
                     type="password"
                     id="inputPassword"
                     class="form-control pl-4"
                     placeholder="Password"
-                    required
+                    required  v-model="formdata.password"
                   />
                 </div>
+                
                 </div>
+                <div class="col-md-3" style="">
+                  <button type="button" class="btn btn-sm btn_view_show" id="viewPassword" @mousedown="ViewPassword" @mouseup="HidePassword">  Show</button>
+                   </div>
+                  
               </div>
               <center>
                 <button
                   class="btn btn-sm btn-primary btn-block text-uppercase"
                   type="submit"
-                  style="padding:5px; width:100px;"
-                >
+                  style="padding:5px; width:100px;" 
+                 v-on:click="login">
                   Sign in
                 </button>
               </center>
@@ -59,9 +64,83 @@
 </template>
 
 <script>
+import axios from "axios"
 export default {
+  data() {
+    return {
+      title: "Form lOGIN",
+      formdata: [],
+      email : "",
+      password: ""
+      
+    };
+  },
 
 
+methods:{
+  ViewPassword(){
+                  console.log(event);
+ 
+        document.getElementById('inputPassword').type = 'text';
+
+  },
+  HidePassword(){
+                  console.log(event);
+ 
+        document.getElementById('inputPassword').type = 'password';
+
+  },
+    login(e){
+         e.preventDefault();
+
+        var  username = this.formdata.email;
+        var password =this.formdata.password;
+
+
+
+        console.log("User name : " +username);
+        console.log("Password : " +password);
+        
+        if(username == "" || password == ""){
+          alert("Empty not allow");
+        }
+
+
+           axios
+        .post("http://localhost:9000/users/login", {username, password})
+        .then(response => {
+
+      console.log(response.data);
+
+          if(response.data == "User Not Found"){
+          
+          console.log("User not found ---------------------------");
+          alert("Invalid User Name or PassWord");
+
+            this.formdata.email ="";
+           this.formdata.password="";
+            
+
+          }
+          else{
+            console.log("User  found ---------------------------------");
+              window.location.replace("#/home");
+          }
+       
+     
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+  
+
+     
+
+
+       
+
+  }
+}
 
     
 };
@@ -178,7 +257,14 @@ body {
   color: white;
   background-color: #3b5998;
 }
-
+.btn_view_show{
+  height: 10px;
+  margin: 0px !important;
+  padding: 0px !important ;
+  transform: translateY(-5px);
+  text-align: left;
+  
+}
 /* Fallback for Edge
 -------------------------------------------------- */
 

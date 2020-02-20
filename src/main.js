@@ -4,7 +4,9 @@ import Navbar from "../src/components/Navbar.vue"
 import Home from "../src/components/Home.vue"
 import About from '../src/components/About.vue'
 import Login from '../src/components/SignIn.vue'
-import SignUp from '../src/components/SignUp.vue'
+import SignUp from '../src/components/SignUp.vue' 
+import Profile from '../src/components/Profile.vue' 
+
 import VueRouter from 'vue-router'
 
 
@@ -17,6 +19,7 @@ const routes =[
   { path: '/home', component: Home },
   { path: '/about', component: About },
   { path: '/signup', component: SignUp },
+  { path: '/profile', component: Profile},
   { path : '*', component: Login }
 
 ];

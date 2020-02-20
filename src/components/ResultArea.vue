@@ -54,7 +54,9 @@
         </div>
 
       <div class="col-md-12">
+        <router-link to="/profile">
        <button type="button" class="btn btn-info mr-1 mb-1" style="float:right">View Profile</button>
+        </router-link>
 
       </div>
 
