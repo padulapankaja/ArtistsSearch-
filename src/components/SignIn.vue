@@ -65,6 +65,8 @@
 
 <script>
 import axios from "axios"
+import VueRouter from 'vue-router'
+
 export default {
   data() {
     return {
@@ -112,7 +114,7 @@ methods:{
 
       console.log(response.data);
 
-          if(response.data == "User Not Found"){
+          if(response.data.respone  == "Not Found"){
           
           console.log("User not found ---------------------------");
           alert("Invalid User Name or PassWord");
@@ -123,8 +125,11 @@ methods:{
 
           }
           else{
-            console.log("User  found ---------------------------------");
-              window.location.replace("#/home");
+            console.log("User  found ---------------------------------" +response.data._id);
+                this.$store.commit("setAuthentication", true);
+                this.$cookie.set('Userdetails', response.data._id);
+                 window.location.replace("#/home");
+                 console.log("This is cookies >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> "+ this.$cookie.get('Userdetails'));
           }
        
      
