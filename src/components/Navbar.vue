@@ -34,7 +34,7 @@ export default {
     logout(){
        
      
-      this.$cookie.delete('Userdetails');
+        this.$cookie.delete('Userdetails');
         this.$store.commit("setAuthentication", false);
 
           console.log("This is cokis function in about me " +this.$cookie.get('Userdetails'));
