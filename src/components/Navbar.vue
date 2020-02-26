@@ -11,7 +11,7 @@
           <router-link class="router_Link" to="/home">Home <span class="sr-only">(current)</span></router-link>
       </li>
       <li class="nav-item">
-         <router-link to="/about" class="router_Link">About <span class="sr-only">(current)</span></router-link>
+         <router-link to="/about" class="router_Link">News <span class="sr-only">(current)</span></router-link>
       </li>
       <li class="nav-item">
          <router-link to="/me" class="router_Link">About Me <span class="sr-only">(current)</span></router-link>
