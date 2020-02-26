@@ -6,6 +6,10 @@
 
       <div class=" col-md-6 " v-for="actor in NewsObject" :key="actor.id" >
         <h4>This is news : {{actor.source.name}} </h4>
+        <h5>This is news : {{actor.author}} </h5>
+        <a :href="actor.url" target="_blank">This is news : View More </a>
+        <h5>This is news : {{actor.content}} </h5>
+         <img :src="actor.urlToImage" style="width: 60px; height:60px;"  />
       </div>
 
     </div>
