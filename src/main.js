@@ -11,11 +11,14 @@ import VueSession from 'vue-cookie'
 import Vuex from "vuex"
 
 import VueRouter from 'vue-router'
+import Paginate from 'vuejs-paginate'
+
 
 
 Vue.use(VueRouter);
 Vue.use(Vuex);
 Vue.use(VueSession);
+Vue.component('paginate', Paginate)
 
 // Vue.component('app-navbar', Navbar);
 

@@ -4,13 +4,30 @@
     <div class="container">
       <h3 class="mt-4" style="color:white">News</h3>
 
-      <div class=" col-md-6 " v-for="actor in NewsObject" :key="actor.id" >
+    <div class=" col-md-6 " v-for="actor in NewsObject.slice(0,5)" :key="actor.id" >
         <h4>This is news : {{actor.source.name}} </h4>
         <h5>This is news : {{actor.author}} </h5>
         <a :href="actor.url" target="_blank">This is news : View More </a>
         <h5>This is news : {{actor.content}} </h5>
          <img :src="actor.urlToImage" style="width: 60px; height:60px;"  />
       </div>
+   
+
+  <paginate
+   v-model="page"
+    :page-count="6"
+    :page-range="3"
+    :margin-pages="2"
+    :click-handler="clickCallback"
+    :prev-text="'Prev'"
+    :next-text="'Next'"
+    :container-class="'pagination'"
+    :page-class="'page-item'"
+    
+    >
+   
+  </paginate>
+
 
     </div>
   </div>
@@ -56,12 +73,13 @@ export default {
       });
 
 
-
   },
+
 
   data() {
     return {
       NewsObject: [],
+       page: 10,
     };
   },
 
@@ -69,6 +87,12 @@ export default {
     "app-about": Navbar
   },
 
+methods:{
+  
+clickCallback: function(pageNum) {
+      console.log(pageNum)
+    }
+}
 
 
 
