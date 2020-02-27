@@ -4,29 +4,23 @@
     <div class="container">
       <h3 class="mt-4" style="color:white">News</h3>
 
-    <div class=" col-md-6 " v-for="actor in NewsObject.slice(0,5)" :key="actor.id" >
-        <h4>This is news : {{actor.source.name}} </h4>
-        <h5>This is news : {{actor.author}} </h5>
-        <a :href="actor.url" target="_blank">This is news : View More </a>
-        <h5>This is news : {{actor.content}} </h5>
-         <img :src="actor.urlToImage" style="width: 60px; height:60px;"  />
-      </div>
-   
 
-  <paginate
-   v-model="page"
-    :page-count="6"
-    :page-range="3"
-    :margin-pages="2"
-    :click-handler="clickCallback"
-    :prev-text="'Prev'"
-    :next-text="'Next'"
-    :container-class="'pagination'"
-    :page-class="'page-item'"
-    
-    >
-   
-  </paginate>
+
+<div class="row" >
+      <div
+        class=" col-md-6 "
+        v-for="actor in NewsObject.slice(0, 5)"
+        :key="actor.id"
+      >
+        <img :src="actor.urlToImage" class="img-fluid" style="width:40%; border-radius:5px; height:40%;" />
+        <p>Publisher : {{ actor.source.name }}</p>
+        <p>Author : {{ actor.author }}</p>
+        <p>Content : {{ actor.content }}</p>
+        <p>Published At : {{ actor.publishedAt }}</p>
+        <a :href="actor.url" target="_blank">This is news : View More </a>
+      </div>
+
+ </div>
 
 
     </div>
@@ -38,7 +32,6 @@ import Navbar from "./Navbar.vue";
 import axios from "axios";
 import VueRouter from "vue-router";
 export default {
-  
   mounted() {
     console.log(
       "This is cokis function in about me " + this.$cookie.get("Userdetails")
@@ -55,7 +48,7 @@ export default {
       )
       .then(response => {
         console.log(response.data);
-       // app.NewsObject = response.data.articles;
+        // app.NewsObject = response.data.articles;
 
         console.log(
           "----------------------------------------------------------------@@@@@@@@@@@@@@@@@@@@@@@@@"
@@ -65,21 +58,25 @@ export default {
         console.log(
           "----------------------------------------------------------------@@@@@@@@@@@@@@@@@@@@@@@@@"
         );
-          // this.$set(this.NewsObject, response.data.articles, true);
-          console.log(this.NewsObject);
+        // this.$set(this.NewsObject, response.data.articles, true);
+        console.log(this.NewsObject);
       })
       .catch(function(error) {
         console.log(error);
       });
-
-
   },
 
+  beforeMount: function() {
+    this.updateVisibleNews();
+  },
 
   data() {
     return {
       NewsObject: [],
-       page: 10,
+      nextId: 13,
+      currentPage: 0,
+      pageSize: 3,
+      visibleNews: []
     };
   },
 
@@ -87,19 +84,23 @@ export default {
     "app-about": Navbar
   },
 
-methods:{
-  
-clickCallback: function(pageNum) {
-      console.log(pageNum)
+  methods: {
+    updatePage(pageNumber) {
+      this.currentPage = pageNumber;
+      this.updateVisibleNews();
+    },
+    updateVisibleNews() {
+      this.visibleNews = this.NewsObject.slice(
+        (this.currentPage = this.pageSize),
+        (this.currentPage = this.pageSize) + this.pageSize
+      );
+
+      if (this.visibleNews.length == 0 && this.currentPage > 0) {
+        this.updatePage(this.currentPage - 1);
+      }
     }
-}
-
-
-
+  }
 };
 </script>
 
-<style>
-
-
-</style>
+<style></style>
